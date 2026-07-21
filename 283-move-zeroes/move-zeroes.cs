@@ -9,7 +9,7 @@ public class Solution {
                 continue;
             }
 
-            if(nums[nonZeroIndex] == 0)
+            if(i!=nonZeroIndex)
             {
                 nums[nonZeroIndex] = nums[i]; 
                 nums[i]= 0;
