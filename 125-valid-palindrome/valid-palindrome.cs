@@ -3,21 +3,22 @@ using System.Text.RegularExpressions;
 public class Solution {
     public bool IsPalindrome(string s) {
         
-        s =Regex.Replace(s,@"[^\p{L}\p{Nd}]","").ToLower();
+       s = Regex.Replace(s,"[^a-zA-Z0-9]","").ToLower();
 
-        int left = 0;
-        int right = s.Length - 1;
-        bool isPalindrome = true;
-        while(left < right)
+        int leftPointer = 0;
+        int rightPointer = s.Length-1;
+
+        while(leftPointer < rightPointer)
         {
-            if(s[left] != s[right])
+            if(s[leftPointer] != s[rightPointer])
             {
-                isPalindrome = false;
+                return false;
             }
-            left++;
-            right--;
+
+            leftPointer ++;
+            rightPointer --;
         }
 
-        return isPalindrome;
+        return true; 
     }
 }
