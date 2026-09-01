@@ -1,16 +1,14 @@
 public class Solution {
     public void ReverseString(char[] s) {
-        
-        int left = 0;
-        int right = s.Length - 1;
-        while(left<right)
-        {   
-            var temp = s[left];
-            s[left] = s[right];
-            s[right] = temp;  
+       char tempVal;
+       int rightPointer = s.Length-1;
+       for(int leftPointer = 0 ; leftPointer < s.Length/2 ; leftPointer++) 
+       {
+            tempVal = s[leftPointer];
+            s[leftPointer] = s[rightPointer];
+            s[rightPointer] =  tempVal;
 
-            left++;
-            right--;
-        }
+            rightPointer --;
+       }
     }
 }
