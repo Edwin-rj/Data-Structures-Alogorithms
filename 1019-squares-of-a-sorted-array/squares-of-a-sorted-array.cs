@@ -1,32 +1,27 @@
 public class Solution {
-    public int[] SortedSquares(int[] nums) {
-        
-        var left  = 0;
-        var square = 0;
-        var right  = nums.Length-1;
-        var rightSquare = 0;
-        var position = nums.Length - 1;
-        int[] arraySquare = new int[nums.Length];
-        
-        while(left<=right)
-        {   
-            square = (nums[left]*nums[left]);
-            rightSquare = (nums[right]*nums[right]);
+    public int[] SortedSquares(int[] nums) 
+    {
+        int left = 0;
+        int right = nums.Length - 1;
+        int[] result = new int[nums.Length];
 
-            if(square > rightSquare )
+        for (int i = nums.Length - 1; i >= 0; i--)
+        {
+            int leftVal = nums[left] * nums[left];
+            int rightVal = nums[right] * nums[right];
+
+            if (leftVal > rightVal)
             {
-                arraySquare[position] = square;
-                left++; 
+                result[i] = leftVal;
+                left++;
             }
-            else 
+            else
             {
-                arraySquare[position] = rightSquare;
+                result[i] = rightVal;
                 right--;
             }
-            position--;
-
         }
 
-        return arraySquare;
+        return result;
     }
 }
