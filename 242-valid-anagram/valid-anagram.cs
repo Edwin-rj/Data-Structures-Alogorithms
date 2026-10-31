@@ -1,27 +1,35 @@
 public class Solution {
     public bool IsAnagram(string s, string t) {
-        int[] freq = new int[26];
-
-        foreach (char i in s)
+      
+        if(s.Length != t.Length)
         {
-           freq[i - 'a']++;     
+            return false;
         }
 
-        foreach (char j in t)
+
+        int[] asci = new int[26];
+
+
+        foreach(var i in s)
         {
-           freq[j - 'a']--;     
+           asci[i - 'a']++;
         }
 
-        foreach(var k in freq)
+
+        foreach(var j in t)
         {
-            if(k != 0)
+            asci[j - 'a']--;
+
+
+            if( asci[j - 'a'] < 0)
             {
-               return false;     
+                return false;
             }
         }
 
+
         return true;
 
-    }
 
+    }
 }
