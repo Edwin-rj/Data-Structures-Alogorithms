@@ -1,35 +1,27 @@
 public class Solution {
     public bool IsAnagram(string s, string t) {
-        Dictionary<char,int> first = new();
-        if(s.Count()!=t.Count())return false;
+        int[] freq = new int[26];
 
-        foreach(char i in s)
+        foreach (char i in s)
         {
-            if(first.TryGetValue(i,out int k))
-            {
-                 first[i] = ++k;
-            }else{
-
-            first[i] = 1;}
+           freq[i - 'a']++;     
         }
 
-        foreach(char j in t )
+        foreach (char j in t)
         {
-            if(first.TryGetValue(j,out int k))
+           freq[j - 'a']--;     
+        }
+
+        foreach(var k in freq)
+        {
+            if(k != 0)
             {
-                if(k == 1)
-                {
-                    first.Remove(j);
-                }else{
-                    first[j] = --k;
-                }
+               return false;     
             }
         }
 
-        if(first.Count()==0)
-        {
-            return true;
-        }
-        return false;
+        return true;
+
     }
+
 }
