@@ -1,0 +1,2 @@
+-- Write your PostgreSQL query statement below
+select customer_id , coalesce(count(distinct v.visit_id),0) - coalesce(count(distinct t.visit_id),0) count_no_trans  from  visits v left join transactions t on t.visit_id = v.visit_id  group by customer_id having coalesce(count(distinct v.visit_id),0) - coalesce(count(distinct t.visit_id),0)  <> 0
