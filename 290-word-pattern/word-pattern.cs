@@ -22,12 +22,6 @@ public class Solution {
         var xVal = String.Join("",x.Values);
         var yVal = String.Join("",y.Values);
 
-
-        if(xVal == yVal)
-        {
-            return true;
-        }
-
-        return false;
+        return xVal == yVal;
     }
 }
