@@ -5,23 +5,36 @@ public class Solution {
 
         Dictionary<char,int> x = new();
 
-        for(int i = 0; i < s.Length; i++)
+        foreach(var item in  s)
         {
-            if(x.TryGetValue(s[i], out int y))
-            {
-                x[s[i]] = y + 1;
-            }
-            else
-            {
-                x[s[i]] = 1;
-            }
+            x[item] = x.GetValueOrDefault(item) + 1; 
         }
 
-        foreach(var item in x.OrderByDescending(x => x.Value))
+        var buckets = new List<char>[s.Length+1];
+
+        foreach(var item in x)
         {
-            result += new string(item.Key, item.Value);
+            if(buckets[item.Value] is null){
+                buckets[item.Value] = new List<char>();
+            }  
+
+            buckets[item.Value].Add(item.Key);      
         }
 
-        return result;
+        StringBuilder sb = new StringBuilder (s.Length);
+
+        for(int i = s.Length;i >= 1 ;i--)
+        {
+            if(buckets[i]  is null)
+            {
+                continue;
+            }
+            
+            foreach(var item in buckets[i])
+            {
+                sb.Append(item,i);
+            }
+        }
+        return sb.ToString();
     }
 }
