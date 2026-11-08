@@ -12,16 +12,19 @@ public class Solution {
         }
 
 
-        for(int i =0 ;i < pattern.Length ; i++)
+         for (int i = 0; i < pattern.Length; i++)
         {
-            
-                x[z[i]] = i;
-                y[pattern[i]] = i;
-        } 
+            x.TryGetValue(z[i], out int h);       // 0 if not seen
+            y.TryGetValue(pattern[i], out int j); // 0 if not seen
 
-        var xVal = String.Join("",x.Values);
-        var yVal = String.Join("",y.Values);
+            if (h != j)
+                return false;
 
-        return xVal == yVal;
+            x[z[i]] = i + 1;
+            y[pattern[i]] = i + 1;
+        }
+
+
+        return true;
     }
 }
