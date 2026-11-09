@@ -1,0 +1,1 @@
+select to_char(t1.trans_date, 'YYYY-MM') as month , country,count(*) trans_count, count(case when state = 'approved' then 1 end) as approved_count, sum(amount) trans_total_amount , coalesce(sum(case when state = 'approved' then amount end),0) as approved_total_amount  from transactions t1  group by to_char(t1.trans_date, 'YYYY-MM') , country 
