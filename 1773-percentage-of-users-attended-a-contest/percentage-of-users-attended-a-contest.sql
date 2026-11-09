@@ -1,0 +1,2 @@
+-- Write your PostgreSQL query statement below
+with contest_count as ( select r.contest_id , count(r.user_id) contest_countt  from register r group by r.contest_id), userss as (select count(*) user_count from users)  select  contest_id , Round((contest_countt::numeric/user_count)*100,2) percentage from contest_count cross join userss order by Round((contest_countt::numeric/user_count)*100,2) desc,contest_id asc; 
