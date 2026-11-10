@@ -1,0 +1,3 @@
+with player as (select count(distinct player_id ) player_count from activity),
+first_login as (select min(event_date) first_date , player_id from activity group by player_id)
+select Round(count(case when fl.player_id is not null then 1 end )::numeric /player_count,2) fraction  from activity a left join first_login fl on fl.player_id = a.player_id and a.event_date = fl.first_date + interval '1 day' cross join  player p group by player_count 
