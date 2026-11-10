@@ -1,0 +1,2 @@
+with products as (select count( *) product_count from product )
+select customer_id from customer c cross join products p group by customer_id , product_count having p.product_count = COUNT(DISTINCT c.product_key) 
