@@ -1,0 +1,1 @@
+with min_year as(select product_id , min(year) first_year from sales group by product_id)  select s.product_id ,  first_year , quantity , price from sales s inner join min_year m on m.product_id = s.product_id and year = first_year 
