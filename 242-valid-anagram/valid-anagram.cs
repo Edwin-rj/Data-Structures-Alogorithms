@@ -3,33 +3,19 @@ public class Solution {
       
         if(s.Length != t.Length)
         {
-            return false;
+            return false; 
         }
 
-
-        int[] asci = new int[26];
-
-
-        foreach(var i in s)
+        int[] x = new int [26];
+        for(int i =0 ; i < s.Length ; i ++ )
         {
-           asci[i - 'a']++;
+            x[s[i] - 'a']++;
         }
-
-
-        foreach(var j in t)
+        for(int j =0 ; j < t.Length ; j ++ )
         {
-            asci[j - 'a']--;
-
-
-            if( asci[j - 'a'] < 0)
-            {
-                return false;
-            }
+            x[t[j] - 'a']--;
         }
 
-
-        return true;
-
-
+        return !x.Any(y=>y>0);
     }
 }
