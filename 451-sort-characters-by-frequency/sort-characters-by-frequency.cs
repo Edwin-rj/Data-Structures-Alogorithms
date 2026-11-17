@@ -1,40 +1,40 @@
 public class Solution {
     public string FrequencySort(string s) {
-
-        string result = "";
-
-        Dictionary<char,int> x = new();
-
-        foreach(var item in  s)
+        
+        Dictionary<char ,int> x =  new();
+        foreach(var k in s)
         {
-            x[item] = x.GetValueOrDefault(item) + 1; 
+            x[k]  = x.GetValueOrDefault(k) + 1 ;
         }
 
-        var buckets = new List<char>[s.Length+1];
+        var freq = new List<char>[s.Length + 1];
 
         foreach(var item in x)
         {
-            if(buckets[item.Value] is null){
-                buckets[item.Value] = new List<char>();
-            }  
+            if(freq[item.Value] is null)
+            {
+                freq[item.Value] = new List<char>();
+            }
 
-            buckets[item.Value].Add(item.Key);      
+            freq[item.Value].Add(item.Key);
         }
 
-        StringBuilder sb = new StringBuilder (s.Length);
+        var sb = new StringBuilder(s.Length);
 
-        for(int i = s.Length;i >= 1 ;i--)
+        for(int i = freq.Length-1 ; i > 0 ; i--)
         {
-            if(buckets[i]  is null)
-            {
+            if(freq[i] is null)
                 continue;
-            }
-            
-            foreach(var item in buckets[i])
+                
+            var yy = freq[i];
+
+            for(int j = 0; j < yy.Count ; j ++)
             {
-                sb.Append(item,i);
+                
+                sb.Append(yy[j],i);
             }
         }
+
         return sb.ToString();
     }
 }
