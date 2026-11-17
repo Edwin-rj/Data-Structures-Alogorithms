@@ -1,29 +1,25 @@
 public class Solution {
     public char FindTheDifference(string s, string t) {
         
-        if(s.Length == 0)
+        int[] x =  new int[26];
+        for(int i = 0 ; i < t.Length ; i ++ )
         {
-            return t[0];
+            x[t[i] - 'a']++;
         }
 
-        int[] freq = new int[26];
-        foreach(var c in t)
+        for(int i = 0 ; i < s.Length ; i ++ )
         {
-            freq[c -'a']++;
-        }
-        
-        foreach(var c in s)
-        {
-            freq[c -'a']--;
+            x[s[i] - 'a']--;
         }
 
-        for (int i = 0; i < freq.Length; i++)
+        for(int i = 0 ; i <  x.Length ; i ++ )
         {
-            if (freq[i] > 0)
+            if(x[i] > 0)
             {
-                return (char)(i + 'a');
+                return  (char)(i+'a'); 
             }
         }
-        return 'a';
+
+        return 'c';
     }
 }
