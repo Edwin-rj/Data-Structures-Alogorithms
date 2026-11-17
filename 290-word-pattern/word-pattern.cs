@@ -1,30 +1,41 @@
 public class Solution {
     public bool WordPattern(string pattern, string s) {
         
-        Dictionary <string,int> x = new ();
-        Dictionary <char,int>  y = new();
+        string[] ss = s.Split(" ");
 
-        string[] z = s.Split(' ');
-
-        if(z.Length != pattern.Length)
+        if(ss.Length != pattern.Length)
         {
             return false;
         }
 
+        Dictionary<char,int> x = new();
+        Dictionary<string,int> y = new();
 
-         for (int i = 0; i < pattern.Length; i++)
+        StringBuilder xSb =  new ();
+        StringBuilder ySb =  new ();
+
+        int xCount = 1;
+        int yCount = 1;
+
+
+        for(int i  = 0 ; i < pattern.Length ; i ++ )
         {
-            x.TryGetValue(z[i], out int h);       // 0 if not seen
-            y.TryGetValue(pattern[i], out int j); // 0 if not seen
+            if(!x.ContainsKey(pattern[i]))
+            {
+                x[pattern[i]] = xCount++;
+            }
 
-            if (h != j)
-                return false;
+            xSb.Append(x[pattern[i]]);
 
-            x[z[i]] = i + 1;
-            y[pattern[i]] = i + 1;
+            if(!y.ContainsKey(ss[i]))
+            {
+                y[ss[i]] = yCount++;
+            }
+
+            ySb.Append(y[ss[i]]);
         }
 
+        return xSb.ToString() ==  ySb.ToString();
 
-        return true;
     }
 }
