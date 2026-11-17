@@ -1,25 +1,22 @@
 public class Solution {
     public bool ContainsNearbyDuplicate(int[] nums, int k) {
-        
-        Dictionary <int,int> x = new ();
+    
+        Dictionary <int,int> x= new ();
 
-        for(int i = 0 ; i < nums.Length ; i++)
+        for(int i = 0 ; i < nums.Length ; i ++)
         {
-            if(x.TryGetValue(nums[i],out int y))
+            if(x.TryGetValue(nums[i], out var y))
             {
-                if((i-y) <= k )
+                if((i - y) <= k )
                 {
-                    return true;
+                  return true;
                 }
-                x[nums[i]] = i;
+            }
 
-            }
-            else
-            {
-                x[nums[i]] = i;
-            }
+            x[nums[i]] = i;
         }
-        return false;
-    }
 
+        return false;
+
+    }
 }
