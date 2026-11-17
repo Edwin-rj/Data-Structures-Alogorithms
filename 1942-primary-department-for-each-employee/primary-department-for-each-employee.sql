@@ -1,0 +1,2 @@
+with employee_one as (select employee_id from employee group by employee_id having count(department_id) = 1 )
+select e.employee_id ,e.department_id from employee e  left join employee_one eo on eo.employee_id = e.employee_id where (e.primary_flag = 'Y' or (eo.employee_id is not null))
