@@ -1,0 +1,2 @@
+with manger as (select reports_to mangaer_id , count(*) reports_count ,Round(avg(age)) average_age from employees group by reports_to) 
+select employee_id , name ,reports_count , average_age from employees e inner join manger on mangaer_id = employee_id order by employee_id 
