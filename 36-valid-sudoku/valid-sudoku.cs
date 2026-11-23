@@ -1,54 +1,28 @@
 public class Solution {
     public bool IsValidSudoku(char[][] board) {
 
-        // Rule 1: Check rows
+        bool[,] rows = new bool[9, 9];
+        bool[,] cols = new bool[9, 9];
+        bool[,] boxes = new bool[9, 9];
+
         for (int i = 0; i < 9; i++)
         {
-            HashSet<char> row = new();
-
             for (int j = 0; j < 9; j++)
             {
-                if (board[i][j] == '.')
+                char num = board[i][j];
+
+                if (num == '.')
                     continue;
 
-                if (!row.Add(board[i][j]))
+                int n = num - '1';
+                int box = (i / 3) * 3 + (j / 3);
+
+                if (rows[i, n] || cols[j, n] || boxes[box, n])
                     return false;
-            }
-        }
 
-        // Rule 2: Check columns
-        for (int i = 0; i < 9; i++)
-        {
-            HashSet<char> col = new();
-
-            for (int j = 0; j < 9; j++)
-            {
-                if (board[j][i] == '.')
-                    continue;
-
-                if (!col.Add(board[j][i]))
-                    return false;
-            }
-        }
-
-        // Rule 3: Check 3x3 boxes
-        for (int i = 0; i < 9; i += 3)
-        {
-            for (int j = 0; j < 9; j += 3)
-            {
-                HashSet<char> box = new();
-
-                for (int r = i; r < i + 3; r++)
-                {
-                    for (int c = j; c < j + 3; c++)
-                    {
-                        if (board[r][c] == '.')
-                            continue;
-
-                        if (!box.Add(board[r][c]))
-                            return false;
-                    }
-                }
+                rows[i, n] = true;
+                cols[j, n] = true;
+                boxes[box, n] = true;
             }
         }
 
