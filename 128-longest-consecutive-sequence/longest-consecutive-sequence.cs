@@ -1,46 +1,44 @@
 public class Solution {
     public int LongestConsecutive(int[] nums) {
 
-     var length = 0;
+        var length = 0;
 
-     var maxLength = 0;
+        var maxLength = 0;
 
-     if(!nums.Any())
-     {
-        return 0;
-     }
-
-     nums = nums.OrderBy(x=>x).ToArray();
-
-    for(int i = 0; i < nums.Length-1 ; i ++)
-    {
-        if(nums[i] == nums[i+1])
+        if(!nums.Any())
         {
-            continue;
+            return 0;
         }
 
-        if((nums[i]+1) == nums[i+1])
+        HashSet<int> x = new ();     
+
+        foreach(var item in nums)
         {
-            length++;
+            x.Add(item);
         }
-        else
+
+        var currentNum = 0;
+        for(int i = 0; i < nums.Length; i ++)
         {
-            maxLength = Math.Max(maxLength,length);
-            length = 0;
+            currentNum = nums[i]; 
+            if(!x.Contains(currentNum-1))
+            {
+                length = 1;
+
+                while(x.Contains(currentNum + 1))
+                {
+                    currentNum++;
+                    length++;
+                }
+
+                maxLength = Math.Max(maxLength,length);
+            }
+            else
+            {
+                length = 1; 
+            }
         }
-    }
 
-    
-    maxLength = Math.Max(maxLength,length);
-
-    if(maxLength == 0)
-    {
-        return 1;
-    } 
-    else
-    {
-        return maxLength + 1; 
-    }
-
+        return maxLength;
     }
 }
