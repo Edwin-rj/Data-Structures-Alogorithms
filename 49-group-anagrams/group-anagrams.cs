@@ -7,9 +7,13 @@ public class Solution {
 
      foreach(var s in strs)
      {
-        char[] chars = s.ToArray();
-        Array.Sort(chars);
-        var k = new string(chars);
+        int[] chars = new int[26];
+        foreach (char c in s) 
+        {
+            chars[c-'a']++;
+        }
+
+        var k = String.Join(",",chars);
 
 
         if(x.TryGetValue(k, out var y))
@@ -18,7 +22,7 @@ public class Solution {
         }
         else
         {
-            x[k] =  new List<string>(); 
+            x[k] = new List<string>(); 
             x[k].Add(s);
         }
      }
