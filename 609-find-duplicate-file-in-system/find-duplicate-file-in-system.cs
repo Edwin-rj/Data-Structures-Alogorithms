@@ -12,13 +12,12 @@ public class Solution {
             for(int i = 1 ; i < items.Length ;i ++)
             {
                 var hi = items[i].Split("(");
-                var y = (items[0] + "/"+ hi[0]);
                 if(j.TryGetValue(hi[1],out var k))
                 {
-                    k.Add(y);
+                    k.Add((items[0] + "/"+ hi[0]));
                 }else
                 {
-                    j[hi[1]] = new List<string>() {y};
+                    j[hi[1]] = new List<string>() {(items[0] + "/"+ hi[0])};
                 }
             }
         }
