@@ -1,30 +1,25 @@
 public class Solution {
     public IList<IList<string>> FindDuplicate(string[] paths) {
 
-        List<string>  y = new();
+
         var rooot = new List<IList<string>>();
+        Dictionary <string,List<string>> j = new();
+
         foreach(var item in paths)
         {
             var items = item.Split(' ');
 
             for(int i = 1 ; i < items.Length ;i ++)
             {
-                y.Add(items[0] + "/"+ items[i]);
-            }
-        }
-
-        Dictionary <string,List<string>> j = new();
-
-        foreach(var item in y)
-        {
-            var hi = item.Split("(");
-
-            if(j.TryGetValue(hi[1],out var k))
-            {
-                k.Add(hi[0]);
-            }else
-            {
-                j[hi[1]] = new List<string>() {hi[0]};
+                var hi = items[i].Split("(");
+                var y = (items[0] + "/"+ hi[0]);
+                if(j.TryGetValue(hi[1],out var k))
+                {
+                    k.Add(y);
+                }else
+                {
+                    j[hi[1]] = new List<string>() {y};
+                }
             }
         }
 
