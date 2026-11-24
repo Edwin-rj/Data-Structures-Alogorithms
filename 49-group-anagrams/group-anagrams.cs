@@ -1,35 +1,37 @@
 public class Solution {
     public IList<IList<string>> GroupAnagrams(string[] strs) {
-         
-IList<IList<string>> finalArray = new List<IList<string>>();
 
-            Dictionary<string,List<int>> first = new();
-            for (int index = 0; index < strs.Length; index++)
-            {
-                var key = new string(strs[index].OrderBy(c => c).ToArray());
-                if(first.TryGetValue(key, out var res))
-                {
-                    res.Add(index);                
-                }
-                else{
-                    first[key] = new List<int>{ index }; 
-                }
-            }
+     Dictionary <string , List<string>> x = new ();
 
-             foreach (var i in first)
-             {
-                
-                   var io= i.Value;
-                    List<string> m = new();
-                    foreach(int h in io)
-                    {
-                        m.Add(strs[h]);
-                    }
+     var i = new List<IList<string>>();
 
-                    finalArray.Add(m);
-                
-            }
+     foreach(var s in strs)
+     {
+        char[] chars = s.ToArray();
+        Array.Sort(chars);
+        var k = new string(chars);
 
-            return finalArray;
+
+        if(x.TryGetValue(k, out var y))
+        {
+            y.Add(s);
+        }
+        else
+        {
+            x[k] =  new List<string>(); 
+            x[k].Add(s);
+        }
+     }
+
+     foreach(var item in x)
+     {
+        i.Add(item.Value);
+     }
+
+
+     return i;
+
+
+
     }
 }
