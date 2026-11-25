@@ -11,18 +11,21 @@ public class UndergroundSystem {
         checkIns[id] = (stationName,t); 
     }   
     
-    public void CheckOut(int id, string stationName, int t) {
-        
+    public void CheckOut(int id, string stationName, int t)
+    {
+        var value = checkIns[id];
 
-        var value = checkIns[id] ;
-        if(checkOuts.TryGetValue((value.Start , stationName),out var y))
+        if (checkOuts.TryGetValue((value.Start, stationName), out var y))
         {
-            checkOuts[(value.Start , stationName)] = ((y.Total+(t-value.CheckInTime)),y.Count+1);
+            checkOuts[(value.Start, stationName)] =
+                (y.Total + (t - value.CheckInTime), y.Count + 1);
         }
         else
         {
-            checkOuts[(value.Start , stationName)] = (t-value.CheckInTime,1); 
+            checkOuts[(value.Start, stationName)] = (t - value.CheckInTime, 1);
         }
+
+        checkIns.Remove(id);
     }
     
     public double GetAverageTime(string startStation, string endStation) {
